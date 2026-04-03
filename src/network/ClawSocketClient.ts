@@ -59,7 +59,21 @@ export class ClawSocketClient {
 	constructor(private url = "ws://localhost:3838") {}
 
 	connect(): void {
-		if (this.destroyed) return;
+		if (this.destroyed || this.demoMode) return;
+
+		// Close existing socket if any
+		if (this.ws) {
+			this.ws.onclose = null;
+			this.ws.onerror = null;
+			this.ws.close();
+			this.ws = null;
+		}
+
+		// Clear any pending reconnect timer
+		if (this.reconnectTimer) {
+			clearTimeout(this.reconnectTimer);
+			this.reconnectTimer = null;
+		}
 
 		try {
 			this.ws = new WebSocket(this.url);
@@ -132,15 +146,7 @@ export class ClawSocketClient {
 	}
 
 	private handleConnectionFailure(): void {
-		this.reconnectAttempts++;
-		if (
-			this.reconnectAttempts >= this.maxAttemptsBeforeDemo &&
-			!this.demoMode
-		) {
-			this.startDemoMode();
-		} else if (!this.demoMode) {
-			this.scheduleReconnect();
-		}
+		this.scheduleReconnect();
 	}
 
 	private scheduleReconnect(): void {
@@ -152,7 +158,12 @@ export class ClawSocketClient {
 			return;
 		}
 
+		if (this.reconnectTimer) {
+			clearTimeout(this.reconnectTimer);
+		}
+
 		this.reconnectTimer = setTimeout(() => {
+			this.reconnectTimer = null;
 			this.connect();
 		}, this.reconnectDelay);
 

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "research/pixel-art-tooling.md",
+                "file": "iterations/iteration-02-limezu-integration.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "pixel-art-tooling"
+              "title": "iteration-02-limezu-integration"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "research/pixel-art-tooling.md",
+                "file": "iterations/iteration-02-limezu-integration.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Rückverweise auf pixel-art-tooling"
+              "title": "Rückverweise auf iteration-02-limezu-integration"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "research/pixel-art-tooling.md",
+                "file": "iterations/iteration-02-limezu-integration.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Ausgehende Links von pixel-art-tooling öffnen"
+              "title": "Ausgehende Links von iteration-02-limezu-integration öffnen"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "research/pixel-art-tooling.md",
+                "file": "iterations/iteration-02-limezu-integration.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Gliederung von pixel-art-tooling"
+              "title": "Gliederung von iteration-02-limezu-integration"
             }
           }
         ]
@@ -185,6 +185,7 @@
   },
   "active": "f479f53085cca1ee",
   "lastOpenFiles": [
+    "research/pixel-art-tooling.md",
     "iterations/iteration-02-limezu-integration.md",
     "research/pixel-art-assets.md",
     "research/phaser-tilemap-architecture.md",

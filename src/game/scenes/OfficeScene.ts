@@ -81,6 +81,12 @@ export class OfficeScene extends Scene {
 		this.client = new ClawSocketClient();
 		this.bridge = new AgentBridge(this.client, this.characterManager);
 		this.client.connect();
+
+		// Clean up on scene shutdown
+		this.events.on("shutdown", () => {
+			this.bridge?.destroy();
+			this.client?.destroy();
+		});
 	}
 
 	private setupCharacters(spawnPoints: SpawnPoint[]): void {
@@ -149,10 +155,5 @@ export class OfficeScene extends Scene {
 
 	update(): void {
 		this.characterManager?.update();
-	}
-
-	shutdown(): void {
-		this.bridge?.destroy();
-		this.client?.destroy();
 	}
 }

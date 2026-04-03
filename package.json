@@ -4,15 +4,14 @@
     "version": "1.1.0",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/phaserjs/template-bun.git"
+        "url": "git+https://github.com/ractive/clawffice.git"
     },
-    "author": "Phaser Studio <support@phaser.io> (https://phaser.io/)",
+    "author": "ractive",
     "license": "MIT",
-    "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
     "bugs": {
-        "url": "https://github.com/phaserjs/template-bun/issues"
+        "url": "https://github.com/ractive/clawffice/issues"
     },
-    "homepage": "https://github.com/phaserjs/template-bun#readme",
+    "homepage": "https://github.com/ractive/clawffice#readme",
     "scripts": {
         "dev": "bunx --bun vite --config vite/config.dev.mjs",
         "build": "bunx --bun vite build --config vite/config.prod.mjs",

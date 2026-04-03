@@ -169,14 +169,10 @@ describe("ClawSocketClient", () => {
 				// biome-ignore lint/suspicious/noExplicitAny: test mock
 			}) as any;
 
-			// Each connect() call that throws increments reconnectAttempts via handleConnectionFailure
-			// and scheduleReconnect also increments. Let's trace:
-			// connect() #1 -> throws -> handleConnectionFailure: attempts=1, <3 so scheduleReconnect
-			//   scheduleReconnect: attempts=2, <3 so sets timer
-			// We need the timer to fire for connect() #2.
-			// Instead, call connect() manually 3 times to simulate the retries.
-			client2.connect(); // attempt 1 via handleConnectionFailure, then scheduleReconnect makes it 2
-			client2.connect(); // attempt 3 via handleConnectionFailure => demo mode
+			// Each connect() that throws -> handleConnectionFailure -> scheduleReconnect increments once
+			client2.connect(); // attempt 1
+			client2.connect(); // attempt 2
+			client2.connect(); // attempt 3 -> demo mode
 
 			expect(starts2.length).toBe(4); // 4 demo agents
 			expect(starts2[0].agentId).toBe("demo-main");
@@ -197,8 +193,9 @@ describe("ClawSocketClient", () => {
 				// biome-ignore lint/suspicious/noExplicitAny: test mock
 			}) as any;
 
-			client.connect(); // attempts 1 -> scheduleReconnect -> attempts 2
-			client.connect(); // attempts 3 -> demo mode
+			client.connect(); // attempt 1
+			client.connect(); // attempt 2
+			client.connect(); // attempt 3 -> demo mode
 
 			// Wait for one demo tick (3 seconds)
 			await new Promise((r) => setTimeout(r, 3100));

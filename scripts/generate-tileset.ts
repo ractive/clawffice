@@ -73,7 +73,7 @@ function drawCarpet(col: number, row: number) {
   ];
   for (const [dx, dy] of dots) {
     px(ox + dx, oy + dy, 1, 1, "#5E6E7F");
-    px(ox + ((dx + 13) % 30), oy + ((dy + 11) % 30), 1, 1, "#7888998");
+    px(ox + ((dx + 13) % 30), oy + ((dy + 11) % 30), 1, 1, "#788899");
   }
 }
 

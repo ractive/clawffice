@@ -201,7 +201,7 @@ describe("AgentBridge", () => {
 		expect(dwight.setState).toHaveBeenCalledWith("tool_running");
 	});
 
-	test("agent:update with status=stopped does not call setState", () => {
+	test("agent:update with status=stopped sets idle and unassigns", () => {
 		client.emit("agent:start", {
 			agentId: "sub-1",
 			status: "working",
@@ -217,7 +217,8 @@ describe("AgentBridge", () => {
 			role: "sub",
 		} satisfies AgentState);
 
-		expect(dwight.setState).not.toHaveBeenCalled();
+		expect(dwight.setState).toHaveBeenCalledWith("idle");
+		expect(dwight.unassignAgent).toHaveBeenCalled();
 	});
 
 	test("agent:stop sets character to idle and unassigns", () => {

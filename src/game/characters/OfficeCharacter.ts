@@ -35,7 +35,7 @@ export class OfficeCharacter {
 			const idleFrames = anims.generateFrameNames("characters", {
 				prefix: `${name}-idle-sit-`,
 				start: 0,
-				end: 3,
+				end: 1,
 				zeroPad: 0,
 			});
 			// Only create if frames exist in the atlas
@@ -54,7 +54,7 @@ export class OfficeCharacter {
 			const typingFrames = anims.generateFrameNames("characters", {
 				prefix: `${name}-typing-`,
 				start: 0,
-				end: 3,
+				end: 2,
 				zeroPad: 0,
 			});
 			if (typingFrames.length > 0) {

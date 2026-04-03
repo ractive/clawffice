@@ -36,7 +36,11 @@ export class AgentBridge {
 
 	private handleUpdate(state: AgentState): void {
 		const char = this.characters.getByAgentId(state.agentId);
-		if (char && state.status !== "stopped") {
+		if (!char) return;
+		if (state.status === "stopped") {
+			char.setState("idle");
+			char.unassignAgent();
+		} else {
 			char.setState(state.status);
 		}
 	}

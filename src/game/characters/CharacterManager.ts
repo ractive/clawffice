@@ -32,7 +32,8 @@ export class CharacterManager {
 
 		for (const name of CHARACTER_NAMES) {
 			const sp = spawnMap.get(name);
-			// If no spawn point for this character, place in a default grid position
+			// If no spawn point, place in a default grid position
+			// Note: ?? binds lower than +, so this is already (sp?.x) ?? (100 + size*80)
 			const x = sp?.x ?? 100 + this.characters.size * 80;
 			const y = sp?.y ?? 400;
 
@@ -67,8 +68,9 @@ export class CharacterManager {
 			const char = this.characters.get(name);
 			if (char && !char.agentId) return char;
 		}
-		// Fall back to any unassigned
+		// Fall back to any unassigned (skip michael — reserved for main agent)
 		for (const name of this.assignmentOrder) {
+			if (name === "michael") continue;
 			const char = this.characters.get(name);
 			if (char && !char.agentId) return char;
 		}

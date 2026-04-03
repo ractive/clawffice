@@ -39,14 +39,8 @@ function createMockScene() {
 	};
 }
 
-// We import the real classes but feed them mock scenes so Phaser is never loaded
-// Use dynamic import to avoid Phaser resolution at module level
-let CharacterManager: typeof import("../../../src/game/characters/CharacterManager").CharacterManager;
-
-// We need to mock the Phaser module before importing
-import { CharacterManager as CM } from "../../../src/game/characters/CharacterManager";
-
-CharacterManager = CM;
+// Phaser is mocked above via mock.module, so static imports resolve to the mock
+import { CharacterManager } from "../../../src/game/characters/CharacterManager";
 
 const SPAWN_POINTS = [
 	{ name: "michael", x: 100, y: 200 },
@@ -120,11 +114,11 @@ describe("CharacterManager", () => {
 		expect(next2).toBeDefined();
 		expect(next2?.characterName).toBe("pam");
 
-		// Assign pam — falls back to assignmentOrder (michael first since he's index 0)
+		// Assign pam — falls back to assignmentOrder (skips michael, goes to angela)
 		manager.assignAgent("agent-3", "pam");
 		const next3 = manager.getNextAvailable();
 		expect(next3).toBeDefined();
-		expect(next3?.characterName).toBe("michael");
+		expect(next3?.characterName).toBe("angela");
 	});
 
 	test("getNextAvailable returns undefined when all assigned", () => {
