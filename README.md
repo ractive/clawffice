@@ -65,7 +65,10 @@ Both pipelines require the LimeZu asset packs in `./LimeZu/` (gitignored — pur
 
 ## Art Credits
 
-All pixel art assets by [LimeZu](https://limezu.itch.io) — Modern Office + Modern Interiors packs.
+All pixel art assets by [LimeZu](https://limezu.itch.io) — Modern Office + Modern Interiors packs. LimeZu creates amazing pixel art full-time. If you like what you see, consider supporting him:
+
+- [itch.io](https://limezu.itch.io) — buy the asset packs
+- [Patreon](https://www.patreon.com/limezu) — monthly support with early access to new sprites
 
 ## License
 
