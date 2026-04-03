@@ -1,7 +1,7 @@
 ---
 title: Iteration 02 — LimeZu Asset Integration
 type: iteration
-status: in-progress
+status: complete
 tags:
   - iteration
   - assets

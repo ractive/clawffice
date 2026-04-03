@@ -288,7 +288,7 @@ Since LimeZu spritesheets have 56 frames per row:
 
 ## 11. Reference Projects and Resources
 
-- [[pixel-art-assets]] -- earlier asset research including LimeZu pricing
+- [[research/pixel-art-assets]] -- earlier asset research including LimeZu pricing
 - [a-dev-adventure-game](https://github.com/albert-gonzalez/a-dev-adventure-game) -- Phaser.js game using LimeZu Modern Interiors + Tiled
 - [Phaser forum: Multi-layer characters](https://phaser.discourse.group/t/character-with-multiple-sprite-layers-body-clothes-accessories/10011) -- Container vs CanvasTexture approaches
 - [Ourcade: Loading Tiled Tilemaps](https://blog.ourcade.co/posts/2020/phaser-3-noob-guide-loading-tiled-tilemaps/) -- Step-by-step Tiled + Phaser guide

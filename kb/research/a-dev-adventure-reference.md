@@ -9,7 +9,7 @@ source: "https://github.com/albert-gonzalez/a-dev-adventure-game"
 
 # Reference Analysis: a-dev-adventure-game
 
-The only known open-source Phaser 3 game using LimeZu Modern Interiors assets. Created by Albert Gonzalez as a portfolio RPG. This document extracts every integration insight relevant to [[limezu-phaser-integration]].
+The only known open-source Phaser 3 game using LimeZu Modern Interiors assets. Created by Albert Gonzalez as a portfolio RPG. This document extracts every integration insight relevant to [[research/limezu-phaser-integration]].
 
 ## 1. Tech Stack
 

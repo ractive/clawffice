@@ -1,7 +1,7 @@
 ---
 title: Iteration 01 — Foundation
 type: iteration
-status: completed
+status: complete
 tags:
   - iteration
   - foundation
