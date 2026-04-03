@@ -1,0 +1,129 @@
+{
+  "tileSize": 32,
+  "columns": 6,
+  "rows": 4,
+  "imageWidth": 192,
+  "imageHeight": 128,
+  "tiles": {
+    "carpet": {
+      "col": 0,
+      "row": 0,
+      "gid": 1
+    },
+    "wall": {
+      "col": 1,
+      "row": 0,
+      "gid": 2
+    },
+    "glass_wall": {
+      "col": 2,
+      "row": 0,
+      "gid": 3
+    },
+    "door": {
+      "col": 3,
+      "row": 0,
+      "gid": 4
+    },
+    "kitchen_tile": {
+      "col": 4,
+      "row": 0,
+      "gid": 5
+    },
+    "annex_carpet": {
+      "col": 5,
+      "row": 0,
+      "gid": 6
+    },
+    "desk_top_left": {
+      "col": 0,
+      "row": 1,
+      "gid": 7
+    },
+    "desk_top_right": {
+      "col": 1,
+      "row": 1,
+      "gid": 8
+    },
+    "desk_bottom_left": {
+      "col": 2,
+      "row": 1,
+      "gid": 9
+    },
+    "desk_bottom_right": {
+      "col": 3,
+      "row": 1,
+      "gid": 10
+    },
+    "office_chair": {
+      "col": 4,
+      "row": 1,
+      "gid": 11
+    },
+    "bookshelf": {
+      "col": 5,
+      "row": 1,
+      "gid": 12
+    },
+    "filing_cabinet": {
+      "col": 0,
+      "row": 2,
+      "gid": 13
+    },
+    "plant": {
+      "col": 1,
+      "row": 2,
+      "gid": 14
+    },
+    "reception_desk_left": {
+      "col": 2,
+      "row": 2,
+      "gid": 15
+    },
+    "reception_desk_right": {
+      "col": 3,
+      "row": 2,
+      "gid": 16
+    },
+    "copier": {
+      "col": 4,
+      "row": 2,
+      "gid": 17
+    },
+    "vending_machine": {
+      "col": 5,
+      "row": 2,
+      "gid": 18
+    },
+    "water_cooler": {
+      "col": 0,
+      "row": 3,
+      "gid": 19
+    },
+    "coffee_maker": {
+      "col": 1,
+      "row": 3,
+      "gid": 20
+    },
+    "wall_top": {
+      "col": 2,
+      "row": 3,
+      "gid": 21
+    },
+    "wall_left": {
+      "col": 3,
+      "row": 3,
+      "gid": 22
+    },
+    "wall_right": {
+      "col": 4,
+      "row": 3,
+      "gid": 23
+    },
+    "empty": {
+      "col": 5,
+      "row": 3,
+      "gid": 24
+    }
+  }
+}

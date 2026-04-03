@@ -1,0 +1,37 @@
+{
+    "name": "clawffice",
+    "description": "Pixel art office game visualizing Claude Code agents as The Office characters.",
+    "version": "1.1.0",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ractive/clawffice.git"
+    },
+    "author": "ractive",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/ractive/clawffice/issues"
+    },
+    "homepage": "https://github.com/ractive/clawffice#readme",
+    "scripts": {
+        "dev": "bunx --bun vite --config vite/config.dev.mjs",
+        "build": "bunx --bun vite build --config vite/config.prod.mjs",
+        "typecheck": "tsc --noEmit",
+        "check": "bunx biome check --write src/ test/ && bun run typecheck && bun test",
+        "generate:tileset": "bun scripts/generate-tileset.ts",
+        "generate:tilemap": "bun scripts/generate-tilemap.ts",
+        "generate:characters": "bun scripts/generate-characters.ts",
+        "generate": "bun run generate:tileset && bun run generate:tilemap && bun run generate:characters"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^2.4.10",
+        "@napi-rs/canvas": "^0.1.97",
+        "free-tex-packer-core": "^0.3.5",
+        "sharp": "^0.34.5",
+        "terser": "^5.39.0",
+        "typescript": "~5.7.2",
+        "vite": "^6.3.1"
+    },
+    "dependencies": {
+        "phaser": "^3.90.0"
+    }
+}
