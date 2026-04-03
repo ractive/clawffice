@@ -31,7 +31,9 @@ export class OfficeScene extends Scene {
 				const furnitureTopLayer = map.createLayer("FurnitureTop", tileset);
 
 				if (wallsLayer) {
-					wallsLayer.setCollisionByExclusion([-1]);
+					// Collision is defined per-tile via the "collision" boolean property
+					// in the tileset JSON (GIDs 4–11 correspond to wall/glass tiles).
+					wallsLayer.setCollisionByProperty({ collision: true });
 				}
 
 				// Set depth ordering for layers

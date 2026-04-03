@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 LimeZu
+.tmp_limeza
+public/assets/sprites/*-full.png
+kb/.obsidian/workspace.json

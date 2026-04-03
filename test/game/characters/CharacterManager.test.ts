@@ -42,15 +42,12 @@ function createMockScene() {
 // Phaser is mocked above via mock.module, so static imports resolve to the mock
 import { CharacterManager } from "../../../src/game/characters/CharacterManager";
 
+// Atlas contains only these 4 characters (32×64px LimeZu frames).
 const SPAWN_POINTS = [
 	{ name: "michael", x: 100, y: 200 },
 	{ name: "dwight", x: 150, y: 250 },
 	{ name: "jim", x: 200, y: 300 },
 	{ name: "pam", x: 250, y: 350 },
-	{ name: "angela", x: 300, y: 400 },
-	{ name: "kevin", x: 350, y: 450 },
-	{ name: "oscar", x: 400, y: 500 },
-	{ name: "stanley", x: 450, y: 550 },
 ];
 
 describe("CharacterManager", () => {
@@ -114,24 +111,14 @@ describe("CharacterManager", () => {
 		expect(next2).toBeDefined();
 		expect(next2?.characterName).toBe("pam");
 
-		// Assign pam — falls back to assignmentOrder (skips michael, goes to angela)
+		// Assign pam — all non-michael subagent characters now assigned, returns undefined
 		manager.assignAgent("agent-3", "pam");
 		const next3 = manager.getNextAvailable();
-		expect(next3).toBeDefined();
-		expect(next3?.characterName).toBe("angela");
+		expect(next3).toBeUndefined();
 	});
 
 	test("getNextAvailable returns undefined when all assigned", () => {
-		const names = [
-			"michael",
-			"dwight",
-			"jim",
-			"pam",
-			"angela",
-			"kevin",
-			"oscar",
-			"stanley",
-		];
+		const names = ["michael", "dwight", "jim", "pam"];
 		for (let i = 0; i < names.length; i++) {
 			manager.assignAgent(`agent-${i}`, names[i]);
 		}
@@ -148,7 +135,7 @@ describe("CharacterManager", () => {
 		}
 		// Characters with higher y should have higher depth
 		const dwight = manager.getByName("dwight")!;
-		const stanley = manager.getByName("stanley")!;
-		expect(stanley.sprite.depth).toBeGreaterThan(dwight.sprite.depth);
+		const pam = manager.getByName("pam")!;
+		expect(pam.sprite.depth).toBeGreaterThan(dwight.sprite.depth);
 	});
 });
