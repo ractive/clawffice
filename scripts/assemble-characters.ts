@@ -200,8 +200,10 @@ for (let ci = 0; ci < CHARS; ci++) {
 
   const fullSheet = await compositeCharacter(def);
 
-  // Save full sheet for visual inspection (debug)
-  const fullSheetPath = join(OUT_DIR, `${charName}-full.png`);
+  // Save full sheet for visual inspection (debug) — outside public/ to avoid shipping
+  const debugDir = join(PROJECT, ".tmp_limeza");
+  mkdirSync(debugDir, { recursive: true });
+  const fullSheetPath = join(debugDir, `${charName}-full.png`);
   await sharp(fullSheet).toFile(fullSheetPath);
   console.log(`  Full sheet → ${fullSheetPath}`);
 

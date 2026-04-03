@@ -55,7 +55,40 @@ const required = [
 	"desk_mr",
 	"desk_bl",
 	"desk_br",
+	"desk2_tl",
+	"desk2_tr",
+	"desk2_ml",
+	"desk2_mr",
+	"desk2_bl",
+	"desk2_br",
 	"office_chair",
+	"bookshelf_tl",
+	"bookshelf_tr",
+	"bookshelf_bl",
+	"bookshelf_br",
+	"plant_t",
+	"plant_b",
+	"reception_tl",
+	"reception_tc",
+	"reception_tr",
+	"reception_ml",
+	"reception_mc",
+	"reception_mr",
+	"reception_bl",
+	"reception_bc",
+	"reception_br",
+	"filing_cabinet_t",
+	"filing_cabinet_b",
+	"vending_tl",
+	"vending_tr",
+	"vending_ml",
+	"vending_mr",
+	"vending_bl",
+	"vending_br",
+	"water_cooler",
+	"coffee_maker",
+	"copier_t",
+	"copier_b",
 ];
 for (const key of required) {
 	if (!G[key]) {
@@ -163,7 +196,7 @@ fillRect(walls, 25, 0, 1, 22, G.wall);
 
 // Bottom outer wall (row 21, cols 0-14)
 fillRect(walls, 0, 21, 15, 1, G.wall);
-// Bottom right outer wall (row 21, cols 21-25)
+// Annex right outer wall (col 21, rows 16–bottom)
 fillRect(walls, 21, 16, 1, MAP_H - 16, G.wall);
 
 // ── Michael's office ──
