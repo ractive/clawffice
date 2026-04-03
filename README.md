@@ -1,152 +1,75 @@
-# Phaser Bun TypeScript Template
+# Clawffice
 
-This is a Phaser 3 project template that uses Vite and Bun for bundling. It supports hot-reloading for quick development workflow, includes TypeScript support and scripts to generate production-ready builds.
+A pixel art office game that visualizes Claude Code agents as characters from The Office. Built with Phaser 3, TypeScript, and Bun.
 
-### Versions
-
-This template has been updated for:
-
-- [Phaser 3.90.0](https://github.com/phaserjs/phaser)
-- [Vite 6.3.1](https://github.com/vitejs/vite)
-- [TypeScript 5.7.2](https://github.com/microsoft/TypeScript)
+Agents connect via WebSocket and are assigned to characters (Michael, Dwight, Jim, Pam) who act out their activity in a top-down Dunder Mifflin office — idling, typing, sitting, and walking between desks.
 
 ![screenshot](screenshot.png)
 
 ## Requirements
 
-[Bun](https://bun.sh) is required to install dependencies and run scripts via `bun`.
+- [Bun](https://bun.sh) for package management and script running
+- [LimeZu](https://limezu.itch.io) asset packs (Modern Office + Modern Interiors) in `./LimeZu/` for asset generation
 
-## Available Commands
+## Quick Start
+
+```bash
+bun install
+bun run generate   # build tileset, tilemap, and character sprites from LimeZu assets
+bun run dev        # start dev server at http://localhost:8080
+```
+
+## Commands
 
 | Command | Description |
 |---------|-------------|
-| `bun install` | Install project dependencies |
-| `bun run dev` | Launch a development web server |
-| `bun run build` | Create a production build in the `dist` folder |
-| `bun run dev-nolog` | Launch a development web server without sending anonymous data (see "About log.js" below) |
-| `bun run build-nolog` | Create a production build in the `dist` folder without sending anonymous data (see "About log.js" below) |
+| `bun run dev` | Start Vite dev server with hot reload |
+| `bun run build` | Production build to `dist/` |
+| `bun run check` | Run format + lint + typecheck + tests |
+| `bun run generate` | Regenerate all assets (tileset, tilemap, characters) |
+| `bun run generate:tileset` | Extract tiles from LimeZu sheets into game tileset |
+| `bun run generate:tilemap` | Generate Tiled-compatible office map JSON |
+| `bun run generate:characters` | Composite character sprites from LimeZu layers |
 
-## Writing Code
+## Architecture
 
-After cloning the repo, run `bun install` from your project directory. Then, you can start the local development server by running `bun run dev`.
+```
+src/
+  game/
+    scenes/          Boot → Preloader → OfficeScene
+    characters/      CharacterManager, OfficeCharacter (sprite + state)
+    bridge/          AgentBridge (maps WebSocket events to character actions)
+  network/           ClawSocketClient (WebSocket connection to Claude Code)
 
-The local development server runs on `http://localhost:8080` by default. Please see the Vite documentation if you wish to change this, or add SSL support.
+scripts/
+  build-tileset.ts        Extract tiles from LimeZu source sheets → PNG + JSON
+  generate-tilemap.ts     Generate 30x24 Tiled-compatible office map
+  assemble-characters.ts  Composite 5-layer character sprites → Phaser atlas
 
-Once the server is running you can edit any of the files in the `src` folder. Vite will automatically recompile your code and then reload the browser.
-
-## Template Project Structure
-
-We have provided a default project structure to get you started. This is as follows:
-
-| Path                         | Description                                                |
-|------------------------------|------------------------------------------------------------|
-| `index.html`                 | A basic HTML page to contain the game.                     |
-| `public/assets`              | Game sprites, audio, etc. Served directly at runtime.      |
-| `public/style.css`           | Global layout styles.                                      |
-| `src/game`                   | Folder containing the game code.                           |
-| `src/main.ts`                | Application bootstrap.                                     |
-| `src/game/main.ts`           | Game entry point: configures and starts the game.          |
-| `src/game/scenes`            | Folder with all Phaser game scenes.                        |
-
-## Handling Assets
-
-Vite supports loading assets via JavaScript module `import` statements.
-
-This template provides support for both embedding assets and also loading them from a static folder. To embed an asset, you can import it at the top of the JavaScript file you are using it in:
-
-```js
-import logoImg from './assets/logo.png'
+public/assets/
+  tiles/     office-tileset.png, office-tileset.json, office-map.json
+  sprites/   characters.png, characters.json
 ```
 
-To load static files such as audio files, videos, etc place them into the `public/assets` folder. Then you can use this path in the Loader calls within Phaser:
+## Asset Pipeline
 
-```js
-preload ()
-{
-    //  This is an example of an imported bundled image.
-    //  Remember to import it at the top of this file
-    this.load.image('logo', logoImg);
+Character sprites are composited from LimeZu's 5-layer character generator system:
 
-    //  This is an example of loading a static image
-    //  from the public/assets folder:
-    this.load.image('background', 'assets/bg.png');
-}
-```
+**Body → Eyes → Outfit → Hairstyle → Accessory**
 
-When you issue the `bun run build` command, all static assets are automatically copied to the `dist/assets` folder.
+Each character has hand-picked layers to match their Office counterpart (e.g., Dwight gets mustard shirt + glasses). The pipeline extracts specific animation frames (idle-sit, typing, walk-down) into a compact Phaser atlas.
 
-## Deploying to Production
+The tileset pipeline extracts individual tiles from multiple LimeZu source sheets (office furniture, Room Builder walls/floors, kitchen items) into a single 512x128 tileset with collision metadata.
 
-After you run the `bun run build` command, your code will be built into a single bundle and saved to the `dist` folder, along with any other assets your project imported, or stored in the public assets folder.
+Both pipelines require the LimeZu asset packs in `./LimeZu/` (gitignored — purchase from [limezu.itch.io](https://limezu.itch.io)).
 
-In order to deploy your game, you will need to upload *all* of the contents of the `dist` folder to a public facing web server.
+## Art Credits
 
-## Customizing the Template
+All pixel art assets by [LimeZu](https://limezu.itch.io) — Modern Office + Modern Interiors packs. LimeZu creates amazing pixel art full-time. If you like what you see, consider supporting him:
 
-### Vite
+- [itch.io](https://limezu.itch.io) — buy the asset packs
+- [Patreon](https://www.patreon.com/limezu) — monthly support with early access to new sprites
 
-If you want to customize your build, such as adding plugin (i.e. for loading CSS or fonts), you can modify the `vite/config.*.mjs` file for cross-project changes, or you can modify and/or create new configuration files and target them in specific bun tasks inside of `package.json`. Please see the [Vite documentation](https://vitejs.dev/) for more information.
+## License
 
-## About log.js
-
-If you inspect our node scripts you will see there is a file called `log.js`. This file makes a single silent API call to a domain called `gryzor.co`. This domain is owned by Phaser Studio Inc. The domain name is a homage to one of our favorite retro games.
-
-We send the following 3 pieces of data to this API: The name of the template being used (vue, react, etc). If the build was 'dev' or 'prod' and finally the version of Phaser being used.
-
-At no point is any personal data collected or sent. We don't know about your project files, device, browser or anything else. Feel free to inspect the `log.js` file to confirm this.
-
-Why do we do this? Because being open source means we have no visible metrics about which of our templates are being used. We work hard to maintain a large and diverse set of templates for Phaser developers and this is our small anonymous way to determine if that work is actually paying off, or not. In short, it helps us ensure we're building the tools for you.
-
-However, if you don't want to send any data, you can use these commands instead:
-
-Dev:
-
-```bash
-bun run dev-nolog
-```
-
-Build:
-
-```bash
-bun run build-nolog
-```
-
-Or, to disable the log entirely, simply delete the file `log.js` and remove the call to it in the `scripts` section of `package.json`:
-
-Before:
-
-```json
-"scripts": {
-    "dev": "bun log.js dev & bunx --bun vite --config vite/config.dev.mjs",
-    "build": "bun log.js build & bunx --bun vite build --config vite/config.prod.mjs"
-},
-```
-
-After:
-
-```json
-"scripts": {
-    "dev": "bunx --bun vite --config vite/config.dev.mjs",
-    "build": "bunx --bun vite build --config vite/config.prod.mjs"
-},
-```
-
-Either of these will stop `log.js` from running. If you do decide to do this, please could you at least join our Discord and tell us which template you're using! Or send us a quick email. Either will be super-helpful, thank you.
-
-## Join the Phaser Community!
-
-We love to see what developers like you create with Phaser! It really motivates us to keep improving. So please join our community and show-off your work 😄
-
-**Visit:** The [Phaser website](https://phaser.io) and follow on [Phaser Twitter](https://twitter.com/phaser_)<br />
-**Play:** Some of the amazing games [#madewithphaser](https://twitter.com/search?q=%23madewithphaser&src=typed_query&f=live)<br />
-**Learn:** [API Docs](https://newdocs.phaser.io), [Support Forum](https://phaser.discourse.group/) and [StackOverflow](https://stackoverflow.com/questions/tagged/phaser-framework)<br />
-**Discord:** Join us on [Discord](https://discord.gg/phaser)<br />
-**Code:** 2000+ [Examples](https://labs.phaser.io)<br />
-**Read:** The [Phaser World](https://phaser.io/community/newsletter) Newsletter<br />
-
-Created by [Phaser Studio](mailto:support@phaser.io). Powered by coffee, anime, pixels and love.
-
-The Phaser logo and characters are &copy; 2011 - 2025 Phaser Studio Inc.
-
-All rights reserved.
-# clawffice
+MIT

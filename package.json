@@ -17,15 +17,13 @@
         "build": "bunx --bun vite build --config vite/config.prod.mjs",
         "typecheck": "tsc --noEmit",
         "check": "bunx biome check --write src/ test/ && bun run typecheck && bun test",
-        "generate:tileset": "bun scripts/generate-tileset.ts",
+        "generate:tileset": "bun scripts/build-tileset.ts",
         "generate:tilemap": "bun scripts/generate-tilemap.ts",
-        "generate:characters": "bun scripts/generate-characters.ts",
+        "generate:characters": "bun scripts/assemble-characters.ts",
         "generate": "bun run generate:tileset && bun run generate:tilemap && bun run generate:characters"
     },
     "devDependencies": {
         "@biomejs/biome": "^2.4.10",
-        "@napi-rs/canvas": "^0.1.97",
-        "free-tex-packer-core": "^0.3.5",
         "sharp": "^0.34.5",
         "terser": "^5.39.0",
         "typescript": "~5.7.2",

@@ -1,3 +1,4 @@
+// Art assets: LimeZu Modern Office + Modern Interiors (https://limezu.itch.io)
 import { AUTO, Game } from "phaser";
 import { Boot } from "./scenes/Boot";
 import { OfficeScene } from "./scenes/OfficeScene";

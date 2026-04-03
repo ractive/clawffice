@@ -1,17 +1,11 @@
 import type { Scene } from "phaser";
 import { OfficeCharacter } from "./OfficeCharacter";
 
-/** Default character roster in assignment priority order */
-const CHARACTER_NAMES = [
-	"michael",
-	"dwight",
-	"jim",
-	"pam",
-	"angela",
-	"kevin",
-	"oscar",
-	"stanley",
-];
+/** Default character roster in assignment priority order.
+ * Must match characters present in the sprite atlas (characters.png / characters.json).
+ * Current atlas: michael, dwight, jim, pam (32×64px frames, LimeZu standard).
+ */
+const CHARACTER_NAMES = ["michael", "dwight", "jim", "pam"];
 
 export interface SpawnPoint {
 	name: string;

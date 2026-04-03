@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 LimeZu
+.tmp_limeza
+kb/.obsidian/workspace.json
