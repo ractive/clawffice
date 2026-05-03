@@ -22,31 +22,54 @@ export class OfficeScene extends Scene {
 		let mapLoaded = false;
 		try {
 			const map = this.make.tilemap({ key: "office-map" });
-			const tileset = map.addTilesetImage("office-tileset", "office-tileset");
 
-			if (tileset) {
-				const floorLayer = map.createLayer("Floor", tileset);
-				const wallsLayer = map.createLayer("Walls", tileset);
-				const furnitureLayer = map.createLayer("Furniture", tileset);
-				const furnitureTopLayer = map.createLayer("FurnitureTop", tileset);
+			// Register all 9 LimeZu tilesets
+			const tilesetNames = [
+				"1_Generic_32x32",
+				"2_LivingRoom_32x32",
+				"3_Bathroom_32x32",
+				"12_Kitchen_32x32",
+				"18_Jail_32x32",
+				"19_Hospital_32x32",
+				"Modern_Office_Shadowless_32x32",
+				"Room_Builder_32x32",
+				"Room_Builder_Office_32x32",
+			];
+			const tilesets: Phaser.Tilemaps.Tileset[] = [];
+			for (const name of tilesetNames) {
+				const ts = map.addTilesetImage(name, name);
+				if (ts) tilesets.push(ts);
+			}
 
-				if (wallsLayer) {
-					// Collision is defined per-tile via the "collision" boolean property
-					// in the tileset JSON (GIDs 4–11 correspond to wall/glass tiles).
-					wallsLayer.setCollisionByProperty({ collision: true });
+			if (tilesets.length > 0) {
+				// Create all 8 tile layers with depth ordering
+				const layerConfig: [string, number][] = [
+					["Ground", 0],
+					["Ground Details", 1],
+					["Walls", 2],
+					["Walls Details", 3],
+					["Same Level", 4],
+					["Same Level Details", 5],
+					["Above Head", 10000],
+					["Above Player Details", 10001],
+				];
+
+				for (const [layerName, depth] of layerConfig) {
+					const layer = map.createLayer(layerName, tilesets);
+					layer?.setDepth(depth);
 				}
 
-				// Set depth ordering for layers
-				floorLayer?.setDepth(0);
-				wallsLayer?.setDepth(1);
-				furnitureLayer?.setDepth(2);
-				furnitureTopLayer?.setDepth(10000);
+				// Layer-based collision on Walls + Walls Details
+				const wallsLayer = map.getLayer("Walls")?.tilemapLayer;
+				const wallsDetailsLayer = map.getLayer("Walls Details")?.tilemapLayer;
+				wallsLayer?.setCollisionByExclusion([-1, 0]);
+				wallsDetailsLayer?.setCollisionByExclusion([-1, 0]);
 
-				// Camera bounds to map size
+				// Camera bounds to map size (56×30 tiles at 32px = 1792×960)
 				camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 				mapLoaded = true;
 
-				// Read spawn points from object layer
+				// Read spawn points from object layer (forward-compatible)
 				const spawnPoints: SpawnPoint[] = [];
 				const objectLayer = map.getObjectLayer("Spawns");
 				if (objectLayer) {
@@ -59,6 +82,16 @@ export class OfficeScene extends Scene {
 							});
 						}
 					}
+				}
+
+				// Fallback spawn points (approximate desk positions from DunderMifflin.png)
+				if (spawnPoints.length === 0) {
+					spawnPoints.push(
+						{ name: "michael", x: 160, y: 224 },
+						{ name: "dwight", x: 384, y: 448 },
+						{ name: "jim", x: 480, y: 448 },
+						{ name: "pam", x: 1056, y: 384 },
+					);
 				}
 
 				this.setupCharacters(spawnPoints);
