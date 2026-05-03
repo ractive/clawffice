@@ -18,8 +18,21 @@ export class Preloader extends Scene {
 	}
 
 	preload(): void {
-		// Tileset
-		this.load.image("office-tileset", "assets/tiles/office-tileset.png");
+		// Tilesets (9 LimeZu sheets used by the DunderMifflin map)
+		const tilesets = [
+			"1_Generic_32x32",
+			"2_LivingRoom_32x32",
+			"3_Bathroom_32x32",
+			"12_Kitchen_32x32",
+			"18_Jail_32x32",
+			"19_Hospital_32x32",
+			"Modern_Office_Shadowless_32x32",
+			"Room_Builder_32x32",
+			"Room_Builder_Office_32x32",
+		];
+		for (const name of tilesets) {
+			this.load.image(name, `assets/tiles/${name}.png`);
+		}
 
 		// Tilemap
 		this.load.tilemapTiledJSON("office-map", "assets/tiles/office-map.json");

@@ -17,10 +17,9 @@
         "build": "bunx --bun vite build --config vite/config.prod.mjs",
         "typecheck": "tsc --noEmit",
         "check": "bunx biome check --write src/ test/ && bun run typecheck && bun test",
-        "generate:tileset": "bun scripts/build-tileset.ts",
-        "generate:tilemap": "bun scripts/generate-tilemap.ts",
+        "generate:map": "bun scripts/export-tiled-map.ts",
         "generate:characters": "bun scripts/assemble-characters.ts",
-        "generate": "bun run generate:tileset && bun run generate:tilemap && bun run generate:characters"
+        "generate": "bun run generate:map && bun run generate:characters"
     },
     "devDependencies": {
         "@biomejs/biome": "^2.4.10",
